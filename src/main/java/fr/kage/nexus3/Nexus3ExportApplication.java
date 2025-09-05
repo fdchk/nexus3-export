@@ -27,20 +27,20 @@ public class Nexus3ExportApplication implements CommandLineRunner {
 		String password = removeTrailingQuotes(credentials.getProperty("password"));
 
 		if (args.length == 3) {
-			// Ein einzelnes Repo exportieren
+			// export one repo
 			String url = args[0];
 			String repoId = args[1];
 			String downloadPath = args[2];
 			new DownloadRepository(url, repoId, downloadPath, authenticate, username, password).start();
 		} else if (args.length == 2) {
-			// Alle Repos exportieren
+			// export all repos
 			String url = args[0];
 			String basePath = args[1];
 			new DownloadAllRepositories(url, basePath, authenticate, username, password).start();
 		} else {
-			System.out.println("❌ Ungültige Argumente.");
-			System.out.println("▶ Einzelnes Repo: java -jar nexus3-export.jar <url> <repoId> <outputPath>");
-			System.out.println("▶ Alle Repos   : java -jar nexus3-export.jar <url> <outputBasePath>");
+			System.out.println("❌ Not enough arguments.");
+			System.out.println("▶ Copy a repo      : java -jar nexus3-export.jar <url> <repoId> <outputPath>");
+			System.out.println("▶ Copy all repos   : java -jar nexus3-export.jar <url> <outputPath>");
 			System.exit(1);
 		}
 	}
